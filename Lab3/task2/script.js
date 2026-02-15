@@ -1,47 +1,50 @@
+const form = document.getElementById('todo-form');
 const input = document.getElementById('todo-input');
-const addBtn = document.getElementById('add-btn');
 const todoList = document.getElementById('todo-list');
 
-function addTask() {
-    const text = input.value.trim();
-    if (text === "") return;
+form.addEventListener('submit', function (event) {
+    event.preventDefault();
 
+    const taskText = input.value.trim();
+    if (taskText === '') {
+        return;
+    }
 
-    const li = document.createElement('li');
-    li.className = 'todo-item';
+    addTodoItem(taskText);
+    input.value = '';
+});
 
+function addTodoItem(text) {
+    const listItem = document.createElement('li');
+    listItem.className = 'todo-item';
+
+    const leftSection = document.createElement('div');
+    leftSection.className = 'todo-left';
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
-    checkbox.onclick = function() {
-        span.classList.toggle('done', checkbox.checked);
-    };
-
 
     const span = document.createElement('span');
-    span.className = 'todo-text';
     span.textContent = text;
+    span.className = 'todo-text';
 
+    checkbox.addEventListener('change', function () {
+        span.classList.toggle('done');
+    });
 
-    const delBtn = document.createElement('button');
-    delBtn.innerHTML = '🗑';
-    delBtn.className = 'delete-btn';
-    delBtn.onclick = function() {
-        li.remove();
-    };
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.className = 'delete-btn';
 
+    deleteButton.addEventListener('click', function () {
+        todoList.removeChild(listItem);
+    });
 
-    li.appendChild(checkbox);
-    li.appendChild(span);
-    li.appendChild(delBtn);
-    todoList.appendChild(li);
+    leftSection.appendChild(checkbox);
+    leftSection.appendChild(span);
 
-    input.value = "";
+    listItem.appendChild(leftSection);
+    listItem.appendChild(deleteButton);
+
+    todoList.appendChild(listItem);
 }
-
-addBtn.addEventListener('click', addTask);
-
-
-input.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') addTask();
-});
