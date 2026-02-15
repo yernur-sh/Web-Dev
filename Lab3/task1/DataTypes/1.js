@@ -4,5 +4,5 @@ str.test = 5;
 
 alert(str.test);
 
-undefined (no strict mode)
-An error (strict mode).
+undefined (n, strict, mode)
+An , error (strict ,mode);
