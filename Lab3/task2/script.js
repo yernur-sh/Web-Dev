@@ -1,50 +1,47 @@
-const form = document.getElementById('todo-form');
 const input = document.getElementById('todo-input');
+const addBtn = document.getElementById('add-btn');
 const todoList = document.getElementById('todo-list');
 
-form.addEventListener('submit', function (event) {
-    event.preventDefault();
+function addTask() {
+    const text = input.value.trim();
+    if (text === "") return;
 
-    const taskText = input.value.trim();
-    if (taskText === '') {
-        return;
-    }
 
-    addTodoItem(taskText);
-    input.value = '';
-});
+    const li = document.createElement('li');
+    li.className = 'todo-item';
 
-function addTodoItem(text) {
-    const listItem = document.createElement('li');
-    listItem.className = 'todo-item';
-
-    const leftSection = document.createElement('div');
-    leftSection.className = 'todo-left';
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
+    checkbox.onclick = function() {
+        span.classList.toggle('done', checkbox.checked);
+    };
+
 
     const span = document.createElement('span');
-    span.textContent = text;
     span.className = 'todo-text';
+    span.textContent = text;
 
-    checkbox.addEventListener('change', function () {
-        span.classList.toggle('done');
-    });
 
-    const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Delete';
-    deleteButton.className = 'delete-btn';
+    const delBtn = document.createElement('button');
+    delBtn.innerHTML = '🗑';
+    delBtn.className = 'delete-btn';
+    delBtn.onclick = function() {
+        li.remove();
+    };
 
-    deleteButton.addEventListener('click', function () {
-        todoList.removeChild(listItem);
-    });
 
-    leftSection.appendChild(checkbox);
-    leftSection.appendChild(span);
+    li.appendChild(checkbox);
+    li.appendChild(span);
+    li.appendChild(delBtn);
+    todoList.appendChild(li);
 
-    listItem.appendChild(leftSection);
-    listItem.appendChild(deleteButton);
-
-    todoList.appendChild(listItem);
+    input.value = "";
 }
+
+addBtn.addEventListener('click', addTask);
+
+
+input.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') addTask();
+});
