@@ -1,23 +1,10 @@
-.logo-container {
-  text-align: center;
-  padding: 20px 20px;
-  background-color: #fff;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.06);
-  margin-bottom: 20px;
-}
-
-.kaspi-logo {
-  width: 140px;
-  height: auto;
-  opacity: 0.9;
-}
-
 .category-list {
+
+  margin: 50px auto 20px; 
   display: flex;
   justify-content: center;
   list-style: none;
   padding: 0;
-  margin: 0 auto 20px;
   max-width: 1200px;
   background-color: #fff;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.06);
@@ -33,11 +20,7 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.category-list li:hover {
-  background-color: #f05a48;
-  color: #fff;
-}
-
+.category-list li:hover,
 .category-list li.active {
   background-color: #f05a48;
   color: #fff;
