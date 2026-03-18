@@ -37,3 +37,16 @@ class Motorcycle(Vehicle):
 
     def wheelie(self):
         return "Doing a wheelie! Be careful!"
+    
+class Dog:
+    def __init__(self, name):
+        self.name = name
+    
+    def sit(self):
+        return f"Dog is siitting {self.name}"
+    def bark(self, quantity):
+        for i in range(quantity):
+            return f"Woof!"
+
+
+
